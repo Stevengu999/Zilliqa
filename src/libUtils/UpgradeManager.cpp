@@ -23,8 +23,13 @@
 #include "libUtils/Logger.h"
 using namespace std;
 
+#if 1  // clark
+#define DEFAULT_RELEASE_URL \
+  "https://api.github.com/repos/ckyang/Zilliqa/releases/latest"
+#else
 #define DEFAULT_RELEASE_URL \
   "https://api.github.com/repos/Zilliqa/Zilliqa/releases/latest"
+#endif
 #define USER_AGENT "Zilliqa"
 #define VERSION_FILE_NAME "VERSION"
 #define PUBLIC_KEY_FILE_NAME "pubKeyFile"
@@ -360,8 +365,9 @@ bool UpgradeManager::ReplaceNode(Mediator& mediator) {
     this_thread::sleep_for(
         chrono::seconds(TERMINATION_COUNTDOWN_IN_SECONDS +
                         TERMINATION_COUNTDOWN_OFFSET_LOOKUP));
-
+#if 1  // clark
     BlockStorage::GetBlockStorage().PutMetadata(MetaType::DSINCOMPLETED, {'0'});
+#endif
   } else {
     if (DirectoryService::IDLE == mediator.m_ds->m_mode) {
       LOG_GENERAL(INFO, "Shard node, upgrade after "
@@ -389,10 +395,10 @@ bool UpgradeManager::ReplaceNode(Mediator& mediator) {
                           TERMINATION_COUNTDOWN_OFFSET_DS_LEADER));
     }
   }
-
+#if 1  // clark
   BlockStorage::GetBlockStorage().PutDSCommittee(
       mediator.m_DSCommittee, mediator.m_ds->m_consensusLeaderID);
-
+#endif
   /// Deploy downloaded software
   /// TBD: The call of "dpkg" should be removed.
   /// (https://github.com/Zilliqa/Issues/issues/185)
