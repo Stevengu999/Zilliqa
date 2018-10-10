@@ -141,7 +141,7 @@ string UpgradeManager::DownloadFile(const char* fileTail,
   res = curl_easy_perform(m_curl);
 
   if (res != CURLE_OK) {
-    LOG_GENERAL(WARNING,
+    LOG_GENERAL(INFO,
                 "curl_easy_perform() failed to get redirect url from url ["
                     << downloadFilePath << "]: " << curl_easy_strerror(res));
     return "";
@@ -175,9 +175,9 @@ string UpgradeManager::DownloadFile(const char* fileTail,
   res = curl_easy_perform(m_curl);
 
   if (res != CURLE_OK) {
-    LOG_GENERAL(WARNING, "curl_easy_perform() failed to download file from url["
-                             << downloadFilePath
-                             << "]: " << curl_easy_strerror(res));
+    LOG_GENERAL(INFO, "curl_easy_perform() failed to download file from url["
+                          << downloadFilePath
+                          << "]: " << curl_easy_strerror(res));
     return "";
   }
 
@@ -190,7 +190,7 @@ bool UpgradeManager::HasNewSW() {
   string pubKeyFileName = DownloadFile(PUBLIC_KEY_FILE_NAME);
 
   if (pubKeyFileName.empty()) {
-    LOG_GENERAL(WARNING, "Cannot download public key file!");
+    LOG_GENERAL(INFO, "Cannot download public key file!");
     return false;
   }
 
@@ -199,7 +199,7 @@ bool UpgradeManager::HasNewSW() {
   string versionName = DownloadFile(VERSION_FILE_NAME);
 
   if (versionName.empty()) {
-    LOG_GENERAL(WARNING, "Cannot download version file!");
+    LOG_GENERAL(INFO, "Cannot download version file!");
     return false;
   }
 
