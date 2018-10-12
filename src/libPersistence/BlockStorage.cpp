@@ -412,7 +412,7 @@ bool BlockStorage::PutDSCommittee(
     const shared_ptr<deque<pair<PubKey, Peer>>>& dsCommittee,
     const uint16_t& consensusLeaderID) {
   LOG_MARKER();
-#if 0  // clark
+#if 1  // clark
   m_dsCommitteeDB->ResetDB();
 #endif
   unsigned int index = 0;

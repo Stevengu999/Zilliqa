@@ -395,7 +395,7 @@ bool UpgradeManager::ReplaceNode(Mediator& mediator) {
                           TERMINATION_COUNTDOWN_OFFSET_DS_LEADER));
     }
   }
-#if 1  // clark
+#if 0  // clark
   BlockStorage::GetBlockStorage().PutDSCommittee(
       mediator.m_DSCommittee, mediator.m_ds->m_consensusLeaderID);
 #endif
